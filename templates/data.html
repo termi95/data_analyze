@@ -11,6 +11,7 @@
     <div class="relative mt-16 sm:h-auto">
       <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
       <div id='chart' class='chart w-full overflow-x-scroll'></div>      
+      <div id='weightToPrice' class='chart w-full overflow-x-scroll'></div>      
     </div>
   </div>
 </div>
@@ -18,6 +19,8 @@
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
   var graphs = {{graphJSON | safe}};
+  var graphs2 = {{weightToPrice | safe}};
   Plotly.plot('chart',graphs,{});
+  Plotly.plot('weightToPrice',graphs2,{});
 </script>
 {% endblock%}
