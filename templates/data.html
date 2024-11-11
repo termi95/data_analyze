@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block body %}
-  <h1 class="text-4xl text-black mx-auto p-10">dupa</h1>
+<div id='chart' class='chart'></div>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
 {% endblock%}
