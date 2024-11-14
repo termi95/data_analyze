@@ -17,3 +17,31 @@ def compare_weight_to_price():
                  labels={'Weight': 'Waga (kg)', 'Price_euros': 'Cena (EUR)'},
                  title='Zależność ceny do wagi laptopa')
     return fig.to_json()
+
+def screen_size_distribution():
+    df = pd.DataFrame(execute_query("SELECT Inches FROM laptops"), columns=['Inches'])
+    fig = px.histogram(df, x="Inches", nbins=15,
+                       labels={'Inches': 'Rozmiar ekranu (cale)'},
+                       title="Rozkład wielkości ekranów laptopów")
+    return fig.to_json()
+
+def average_price_by_ram():
+    df = pd.DataFrame(execute_query("SELECT Ram, AVG(Price_euros) AS AvgPrice FROM laptops GROUP BY Ram"), columns=['Ram', 'AvgPrice'])
+    fig = px.bar(df, x="Ram", y="AvgPrice",
+                 labels={'Ram': 'Pamięć RAM (GB)', 'AvgPrice': 'Średnia cena (EUR)'},
+                 title="Średnia cena laptopa w zależności od pamięci RAM")
+    return fig.to_json()
+
+def storage_type_distribution():
+    df = pd.DataFrame(execute_query("SELECT PrimaryStorageType, COUNT(*) AS Count FROM laptops GROUP BY PrimaryStorageType"), columns=['PrimaryStorageType', 'Count'])
+    fig = px.pie(df, values="Count", names="PrimaryStorageType",
+                 title="Udział różnych typów pamięci w laptopach")
+    return fig.to_json()
+
+def resolution_vs_price():
+    df = pd.DataFrame(execute_query("SELECT ScreenW, ScreenH, Price_euros FROM laptops"), columns=['ScreenW', 'ScreenH', 'Price_euros'])
+    df['Resolution'] = df['ScreenW'] * df['ScreenH']
+    fig = px.scatter(df, x='Resolution', y='Price_euros', trendline="ols",
+                     labels={'Resolution': 'Rozdzielczość ekranu (px)', 'Price_euros': 'Cena (EUR)'},
+                     title='Zależność ceny od rozdzielczości ekranu')
+    return fig.to_json()

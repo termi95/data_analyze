@@ -8,19 +8,53 @@
 <div class="overflow-hidden bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <p class="max-w-2xl text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-balance sm:text-6xl">Wykres laptopów</p>
+    
     <div class="relative mt-16 sm:h-auto">
       <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
       <div id='chart' class='chart w-full overflow-x-scroll'></div>      
-      <div id='weightToPrice' class='chart w-full overflow-x-scroll'></div>      
+    </div>
+    
+    <div class="relative mt-16 sm:h-auto">
+      <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
+      <div id='weightToPrice' class='chart w-full overflow-x-scroll'></div>
+    </div>
+    
+    <div class="relative mt-16 sm:h-auto">
+      <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
+      <div id="screenSizeDistribution" class="chart w-full overflow-x-scroll mt-16"></div>
+    </div>
+
+    <div class="relative mt-16 sm:h-auto">
+      <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
+      <div id="averagePriceByRam" class="chart w-full overflow-x-scroll mt-16"></div>
+    </div>
+
+    <div class="relative mt-16 sm:h-auto">
+      <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
+      <div id="storageTypeDistribution" class="chart w-full overflow-x-scroll mt-16"></div>
+    </div>
+
+    <div class="relative mt-16 sm:h-auto">
+      <div class="absolute -inset-2 shadow-sm ring-1 ring-black/5 rounded-lg"></div>
+      <div id="resolutionVsPrice" class="chart w-full overflow-x-scroll mt-16"></div>
     </div>
   </div>
 </div>
 
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
-  var graphs = {{graphJSON | safe}};
-  var graphs2 = {{weightToPrice | safe}};
-  Plotly.plot('chart',graphs,{});
-  Plotly.plot('weightToPrice',graphs2,{});
+  var graphs = {{ graphJSON | safe }};
+  var graphs2 = {{ weightToPrice | safe }};
+  var screenSizeDistribution = {{ screenSizeDistribution | safe }};
+  var averagePriceByRam = {{ averagePriceByRam | safe }};
+  var storageTypeDistribution = {{ storageTypeDistribution | safe }};
+  var resolutionVsPrice = {{ resolutionVsPrice | safe }};
+  
+  Plotly.plot('chart', graphs, {});
+  Plotly.plot('weightToPrice', graphs2, {});
+  Plotly.plot('screenSizeDistribution', screenSizeDistribution, {});
+  Plotly.plot('averagePriceByRam', averagePriceByRam, {});
+  Plotly.plot('storageTypeDistribution', storageTypeDistribution, {});
+  Plotly.plot('resolutionVsPrice', resolutionVsPrice, {});
 </script>
 {% endblock%}
