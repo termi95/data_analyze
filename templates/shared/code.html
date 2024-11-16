@@ -1,0 +1,35 @@
+<p class="text-green-400">import plotly.graph_objects as go</p>
+<p class="text-green-400">import plotly.express as px</p>
+<p class="text-green-400">import pandas as pd</p>
+<p class="text-green-400">from db import execute_query</p>
+<br />
+<p class="text-blue-400">def <span class="text-yellow-300">sold_laptop_number_by_company_name</span>():</p>
+<p class="ml-4 text-white">
+  names, occurrences = zip(*execute_query(
+  <span class="text-yellow-300">"SELECT Company, COUNT(*) AS occurrences FROM laptops GROUP BY Company;"</span>
+  ))
+</p>
+<p class="ml-4 text-white">
+  fig = go.Figure(
+</p>
+<p class="ml-8 text-white">data=[go.Bar(y=occurrences,x=names)],</p>
+<p class="ml-8 text-white">layout_title_text=<span class="text-yellow-300">"Zestawienie sprzedarz marka"</span></p>
+<p class="ml-4 text-white">)</p>
+<p class="ml-4 text-white">return fig.to_json()</p>
+<br />
+<p class="text-blue-400">def <span class="text-yellow-300">compare_weight_to_price</span>():</p>
+<p class="ml-4 text-white">
+  df = pd.DataFrame(execute_query(
+  <span class="text-yellow-300">"SELECT Weight, Price_euros FROM laptops"</span>),
+  columns=[<span class="text-yellow-300">'Weight'</span>, <span class="text-yellow-300">'Price_euros'</span>])
+</p>
+<p class="ml-4 text-white">
+  fig = px.scatter(df, x=<span class="text-yellow-300">'Weight'</span>, y=<span class="text-yellow-300">'Price_euros'</span>, trendline=<span class="text-yellow-300">"ols"</span>,
+</p>
+<p class="ml-8 text-white">
+  labels={<span class="text-yellow-300">'Weight'</span>: <span class="text-yellow-300">'Waga (kg)'</span>, <span class="text-yellow-300">'Price_euros'</span>: <span class="text-yellow-300">'Cena (EUR)'</span>},
+</p>
+<p class="ml-8 text-white">
+  title=<span class="text-yellow-300">'Zależność ceny do wagi laptopa'</span>)
+</p>
+<p class="ml-4 text-white">return fig.to_json()</p>

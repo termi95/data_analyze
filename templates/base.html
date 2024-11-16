@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/python-logo.png') }}">
     <meta name="theme-color" content="#1f2937" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,5 +13,10 @@
     {% include  'navbar.html' %}
     {% block body%}{% endblock %}
     {% include  'footer.html' %}
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
