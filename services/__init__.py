@@ -4,7 +4,11 @@ from .data_service import (
     screen_size_distribution,
     average_price_by_ram,
     storage_type_distribution,
-    resolution_vs_price
+    resolution_vs_price,
+    get_total_laptops,
+    get_most_common_cpu,
+    get_average_ram,
+    get_lightest_laptop
 )
 
 __all__ = [
@@ -13,5 +17,9 @@ __all__ = [
     "screen_size_distribution", 
     "average_price_by_ram", 
     "storage_type_distribution", 
-    "resolution_vs_price"
+    "resolution_vs_price",
+    "get_total_laptops",
+    "get_most_common_cpu",
+    "get_average_ram",
+    "get_lightest_laptop"
 ]

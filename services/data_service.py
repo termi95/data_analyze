@@ -45,3 +45,34 @@ def resolution_vs_price():
                      labels={'Resolution': 'Rozdzielczość ekranu (px)', 'Price_euros': 'Cena (EUR)'},
                      title='Zależność ceny od rozdzielczości ekranu')
     return fig.to_json()
+
+def get_total_laptops():
+    query = "SELECT COUNT(DISTINCT Product) FROM laptops"
+    result = execute_query(query)
+    return result[0][0] if result else 0
+
+def get_most_common_cpu():
+    query = """
+    SELECT CPU_model, COUNT(*) AS count
+    FROM laptops
+    GROUP BY CPU_model
+    ORDER BY count DESC
+    LIMIT 1
+    """
+    result = execute_query(query)
+    return result[0] if result else ("Brak danych", 0)
+
+def get_average_ram():
+    query = "SELECT AVG(RAM) FROM laptops"
+    result = execute_query(query)
+    return round(result[0][0]) if result else 0
+
+def get_lightest_laptop():
+    query = """
+    SELECT Product, Weight
+    FROM laptops
+    ORDER BY Weight ASC
+    LIMIT 1
+    """
+    result = execute_query(query)
+    return result[0] if result else ("Brak danych", 0)
