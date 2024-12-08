@@ -52,3 +52,14 @@ def get_data():
     if data is not None:
         for item in data:
             print(item)
+
+def is_database_empty() -> bool:
+    try:
+        with get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM laptops")
+            count = cursor.fetchone()[0]
+            return count == 0
+    except Exception as e:
+        print(e)
+        return True
